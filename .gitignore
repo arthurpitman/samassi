@@ -1,0 +1,17 @@
+# class files
+*.class
+
+# files for the VM
+*.dex
+
+
+# application files
+*.apk
+*.ap_
+
+# generated folders
+bin/
+gen/
+
+# Local configuration file (sdk path, etc)
+local.properties

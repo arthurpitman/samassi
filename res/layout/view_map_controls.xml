@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent" >
+
+   <ImageButton
+		android:id="@+id/zoom_in_button"
+		android:layout_margin="10dp"
+		android:layout_width="48dp"
+		android:layout_height="48dp"
+		android:contentDescription="@string/zoom_in_button_text"
+		android:src="@drawable/zoom_in" />
+
+	<ImageButton
+		android:id="@+id/zoom_out_button"
+		android:layout_margin="10dp"
+		android:layout_width="48dp"
+		android:layout_height="48dp"
+		android:contentDescription="@string/zoom_out_button_text"
+		android:src="@drawable/zoom_out" />
+
+	<ImageButton
+		android:id="@+id/rotate_cw_button"
+		android:layout_margin="10dp"
+		android:layout_width="48dp"
+		android:layout_height="48dp"
+		android:contentDescription="@string/rotate_cw_button_text"
+		android:src="@drawable/rotate_cw" />
+
+	<ImageButton
+		android:id="@+id/rotate_ccw_button"
+		android:layout_margin="10dp"
+		android:layout_width="48dp"
+		android:layout_height="48dp"
+		android:contentDescription="@string/rotate_ccw_button_text"
+		android:src="@drawable/rotate_ccw" />
+
+</merge>

@@ -1,4 +1,4 @@
 samassi
 =======
 
-Simple Android mapping component
+A simple and lightweight mapping library for Android

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="zoom_in_button_text">Zoom In</string>
+	<string name="zoom_out_button_text">Zoom In</string>
+	<string name="rotate_cw_button_text">Rotate CW</string>
+	<string name="rotate_ccw_button_text">Rotate CCW</string>
+</resources>
