@@ -38,6 +38,15 @@ public class MarkerLayer extends MapLayer {
 	}
 	
 	
+	/**
+	 * Gets the markers.
+	 * @return
+	 */
+	public ArrayList<Marker> getMarkers() {
+		return markers;
+	}
+	
+	
 	@Override
 	public boolean render(Canvas canvas, MapProjection projection,
 			long frameMillis, Runnable invalidateRunnable) {
