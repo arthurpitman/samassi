@@ -151,19 +151,19 @@ public class MapViewpoint {
 
 
 	/**
-	 * Gets the zoom points.
+	 * Gets the map zoom points.
 	 * @return
 	 */
-	public int getZoomPoints() {
+	public int getMapZoomPoints() {
 		return zoomPoints;
 	}
 
 
 	/**
-	 * Sets the zoom points.
+	 * Sets the map zoom points.
 	 * @param zoomPoints
 	 */
-	public void setZoomPoints(int zoomPoints) {
+	public void setMapZoomPoints(int zoomPoints) {
 		this.zoomPoints = zoomPoints;
 	}
 }

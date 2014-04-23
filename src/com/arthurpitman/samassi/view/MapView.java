@@ -442,7 +442,7 @@ public class MapView extends View implements TouchListener  {
 		projection.setMapFocusX(viewpoint.getMapFocusX());
 		projection.setMapFocusY(viewpoint.getMapFocusY());
 		projection.setMapRotation(viewpoint.getMapRotation());
-		projection.setZoomPoints(viewpoint.getZoomPoints());
+		projection.setZoomPoints(viewpoint.getMapZoomPoints());
 		projection.project();
 		invalidate();
 	}
