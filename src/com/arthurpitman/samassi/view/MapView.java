@@ -36,6 +36,7 @@ import com.arthurpitman.samassi.MapPoint;
 import com.arthurpitman.samassi.map.Map;
 import com.arthurpitman.samassi.map.MapLayer;
 import com.arthurpitman.samassi.map.MapProjection;
+import com.arthurpitman.samassi.map.MapViewpoint;
 
 
 /**
@@ -414,6 +415,38 @@ public class MapView extends View implements TouchListener  {
 	public boolean isGestureActive() {
 		return gestureActive;
 	}
+
+
+	/**
+	 * Saves the {@code MapView}'s current viewpoint in a {@code MapViewpoint}.
+	 * @return
+	 */
+	public MapViewpoint saveViewpoint() {
+		return new MapViewpoint(
+				projection.getPixelFocusX(),
+				projection.getPixelFocusY(),
+				projection.getMapFocusX(),
+				projection.getMapFocusY(),
+				projection.getMapRotation(),
+				projection.getZoomPoints());
+	}
+
+
+	/**
+	 * Restores the {@code MapView}'s viewpoint from a {@code MapViewpoint}.
+	 * @param viewpoint
+	 */
+	public void restoreViewpoint(MapViewpoint viewpoint) {
+		projection.setPixelFocusX(viewpoint.getPixelFocusX());
+		projection.setPixelFocusY(viewpoint.getPixelFocusY());
+		projection.setMapFocusX(viewpoint.getMapFocusX());
+		projection.setMapFocusY(viewpoint.getMapFocusY());
+		projection.setMapRotation(viewpoint.getMapRotation());
+		projection.setZoomPoints(viewpoint.getZoomPoints());
+		projection.project();
+		invalidate();
+	}
+
 
 	/*
 	 * ========================================

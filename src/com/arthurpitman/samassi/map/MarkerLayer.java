@@ -28,16 +28,16 @@ public class MarkerLayer extends MapLayer {
 
 	/** The {@code Marker}'s. */
 	private ArrayList<Marker> markers = new ArrayList<Marker>();
-	
-	
+
+
 	/**
 	 * Creates a new {@code MarkerLayer}.
 	 */
 	public MarkerLayer() {
 		super();
 	}
-	
-	
+
+
 	/**
 	 * Gets the markers.
 	 * @return
@@ -45,8 +45,8 @@ public class MarkerLayer extends MapLayer {
 	public ArrayList<Marker> getMarkers() {
 		return markers;
 	}
-	
-	
+
+
 	@Override
 	public boolean render(Canvas canvas, MapProjection projection,
 			long frameMillis, Runnable invalidateRunnable) {
@@ -56,7 +56,7 @@ public class MarkerLayer extends MapLayer {
 		return true;
 	}
 
-	
+
 	@Override
 	public boolean onClick(int x, int y) {
 		// TODO add click support

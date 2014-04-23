@@ -30,25 +30,29 @@ public class Marker {
 
 	/** The {@code Bitmap} associated with the {@code Marker}. */
 	private Bitmap bitmap;
-	
-	/** The {@code Marker}'s location. */	
+
+	/** The {@code Marker}'s location. */
 	private MapPoint location;
-	
-	float[] pixelPoint = new float[2];
-	Paint paint;
+
+	private float[] pixelPoint = new float[2];
+	private Paint paint;
+
+	private float xPixelOffset;
+	private float yPixelOffset;
+
 	private float xOffset;
 	private float yOffset;
-	
-	
+
+
 	/**
 	 * Creates a new {@code Marker}.
 	 */
 	public Marker() {
 		paint = new Paint();
-		paint.setAntiAlias(true);		
+		paint.setAntiAlias(true);
 	}
-	
-	
+
+
 	/**
 	 * Gets the {@code Bitmap} of the {@code Marker}.
 	 * @return
@@ -56,19 +60,44 @@ public class Marker {
 	public Bitmap getBitmap() {
 		return bitmap;
 	}
-	
-	
+
+
 	/**
 	 * Sets the {@code Bitmap} of the {@code Marker}.
 	 * @param bitmap
 	 */
 	public void setBitmap(Bitmap bitmap) {
 		this.bitmap = bitmap;
-		xOffset = bitmap.getWidth() / 2;
-		yOffset = bitmap.getHeight();
+		updateOffsets();
 	}
-	
-	
+
+
+	/**
+	 * Sets the offsets for the {@code Marker}.
+	 * @param xOffset
+	 * @param yOffset
+	 */
+	public void setOffsets(float xOffset, float yOffset) {
+		this.xOffset = xOffset;
+		this.yOffset = yOffset;
+		updateOffsets();
+	}
+
+
+	/**
+	 * Recalculates pixel offsets.
+	 */
+	private void updateOffsets() {
+		if (bitmap == null) {
+			xPixelOffset = 0;
+			yPixelOffset = 0;
+		} else {
+			xPixelOffset = bitmap.getWidth() * xOffset;
+			yPixelOffset = bitmap.getHeight() * yOffset;
+		}
+	}
+
+
 	/**
 	 * Gets the location of the {@code Marker}.
 	 * @return
@@ -76,8 +105,8 @@ public class Marker {
 	public MapPoint getLocation() {
 		return location;
 	}
-	
-	
+
+
 	/**
 	 * Sets the location of the {@code Marker}.
 	 * @param location
@@ -85,8 +114,8 @@ public class Marker {
 	public void setLocation(MapPoint location) {
 		this.location = location;
 	}
-	
-	
+
+
 	/**
 	 * Renders the marker on the map canvas.
 	 * @param canvas
@@ -95,7 +124,7 @@ public class Marker {
 	public void render(Canvas canvas, MapProjection projection) {
 		if ((location != null) && (bitmap != null)) {
 			projection.toPixelCoordinates(location.getX(), location.getY(), pixelPoint);
-			canvas.drawBitmap(bitmap, pixelPoint[0] - xOffset, pixelPoint[1] - yOffset, paint);
+			canvas.drawBitmap(bitmap, pixelPoint[0] - xPixelOffset, pixelPoint[1] - yPixelOffset, paint);
 		}
 	}
 }
