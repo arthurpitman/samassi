@@ -459,6 +459,7 @@ public class MapView extends View implements TouchListener  {
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		projection.setSize(getMeasuredWidth(), getMeasuredHeight());
+		projection.project();
 		invalidate();
 	}
 
