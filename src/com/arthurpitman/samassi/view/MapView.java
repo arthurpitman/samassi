@@ -233,6 +233,24 @@ public class MapView extends View implements TouchListener  {
 
 
 	/**
+	 * Gets the map focus x component.
+	 * @return
+	 */
+	public int getMapFocusX() {
+		return projection.getMapFocusX();
+	}
+
+
+	/**
+	 * Gets the map focus y component.
+	 * @return
+	 */
+	public int getMapFocusY() {
+		return projection.getMapFocusY();
+	}
+
+
+	/**
 	 * Sets the map focus.
 	 * @param mapFocus
 	 */
@@ -263,6 +281,46 @@ public class MapView extends View implements TouchListener  {
 		projection.setMapFocusY(mapFocusY & MapPoint.MASK);
 		projection.project();
 		invalidate();
+	}
+
+
+	/**
+	 * Set pixel focus x component.
+	 * @param pixelFocusX
+	 */
+	public void setPixelFocusX(float pixelFocusX) {
+		projection.setPixelFocusX(pixelFocusX);
+		projection.project();
+		invalidate();
+	}
+
+
+	/**
+	 * Set pixel focus y component.
+	 * @param pixelFocusY
+	 */
+	public void setPixelFocusY(float pixelFocusY) {
+		projection.setPixelFocusY(pixelFocusY);
+		projection.project();
+		invalidate();
+	}
+
+
+	/**
+	 * Gets the pixel focus X component.
+	 * @return
+	 */
+	public float getPixelFocusX() {
+		return projection.getPixelFocusX();
+	}
+
+
+	/**
+	 * Gets the pixel focus Y component.
+	 * @return
+	 */
+	public float getPixelFocusY() {
+		return projection.getPixelFocusY();
 	}
 
 
