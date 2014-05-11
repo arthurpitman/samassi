@@ -108,24 +108,28 @@ public class MapPoint {
 	}
 
 
-	@Override
-	public String toString() {
-		return "(x: " + x + ", y: " + y + ", z: " + z + ")";
+	/**
+	 * Converts a MapPoint integer component to a double component.
+	 * @param v
+	 * @return
+	 */
+	public static double toMapPointDouble(int v) {
+		return ((double) v) / BASE;
 	}
 
 
 	/**
-	 * Interpolates two MapPoints.
-	 * @param p1
-	 * @param p2
-	 * @param blend
+	 * Converts a MapPoint double component to an integer component.
+	 * @param v
 	 * @return
 	 */
-	public static MapPoint interpolate(MapPoint p1, MapPoint p2, double blend) {
-		double blend2 = 1 - blend;
+	public static int toMapPointInt(double v) {
+		return Math.min((int)Math.round(v * BASE), MASK);
+	}
 
-		return new MapPoint((int)Math.round(p1.getX() * blend2 + p2.getX() * blend),
-				(int)Math.round(p1.getY() * blend2 + p2.getY() * blend),
-				(int)Math.round(p1.getZ() * blend2 + p2.getZ() * blend));
+
+	@Override
+	public String toString() {
+		return "(x: " + x + ", y: " + y + ", z: " + z + ")";
 	}
 }
