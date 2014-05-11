@@ -25,11 +25,11 @@ import com.arthurpitman.samassi.GeoPoint;
  * Fields are based on those provided by mbtiles files.
  */
 public class TileSourceMetadata {
-	private GeoPoint[] mapBounds;
-	private GeoPoint mapCenter;
-	private int minimumZoom;
-	private int maximumZoom;
-	private int tileWidth;
+	private final GeoPoint[] mapBounds;
+	private final GeoPoint mapCenter;
+	private final int minimumZoom;
+	private final int maximumZoom;
+	private final int tileWidth;
 
 
 	/**

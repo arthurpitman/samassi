@@ -25,7 +25,6 @@ import android.graphics.BitmapFactory;
 
 import com.arthurpitman.samassi.GeoPoint;
 import com.arthurpitman.samassi.tiles.TileSource;
-import com.arthurpitman.samassi.tiles.TileSourceMetadata;
 
 
 /**
@@ -37,6 +36,11 @@ public class MbTileSource implements TileSource {
 	private static final String METADATA_CENTER = "center";
 	private static final String METADATA_MIN_ZOOM = "minzoom";
 	private static final String METADATA_MAX_ZOOM = "maxzoom";
+	private static final String METADATA_NAME = "name";
+	private static final String METADATA_DESCRIPTION = "description";
+	private static final String METADATA_VERSION = "version";
+	private static final String METADATA_ATTRIBUTION = "attribution";
+	private static final String METADATA_TEMPLATE = "template";
 
 	private SQLiteDatabase database;
 
@@ -73,11 +77,17 @@ public class MbTileSource implements TileSource {
 
 
 	/**
-	 * Gets the {@link TileSourceMetadata} stored in this MbTileSource.
+	 * Gets the {@link MbTileSourceMetadata} stored in this MbTileSource.
 	 * @return
 	 */
-	public TileSourceMetadata getMetadata() {
+	public MbTileSourceMetadata getMetadata() {
 		// temporary storage
+		String name = null;
+		String description = null;
+		String version = null;
+		String attibution = null;
+		String template = null;
+
 		GeoPoint[] mapBounds = null;
 		GeoPoint mapCenter = null;
 		int minimumZoom = 0;
@@ -85,33 +95,44 @@ public class MbTileSource implements TileSource {
 
 		// query metadata, stored as a series of name value pairs
 		Cursor c = database.rawQuery("select name, value from metadata", null);
-		int nameIndex = c.getColumnIndex("name");
+		int keyIndex = c.getColumnIndex("name");
 		int valueIndex = c.getColumnIndex("value");
 		if (c.moveToFirst()) {
 			do {
-				String name = c.getString(nameIndex);
-				if (name.equals(METADATA_MIN_ZOOM)) {
+				String key = c.getString(keyIndex);
+				if (key.equals(METADATA_MIN_ZOOM)) {
 					minimumZoom = c.getInt(valueIndex);
-				} else if (name.equals(METADATA_MAX_ZOOM)) {
+				} else if (key.equals(METADATA_MAX_ZOOM)) {
 					maximumZoom = c.getInt(valueIndex);
-				} else if (name.equals(METADATA_CENTER)) {
+				} else if (key.equals(METADATA_CENTER)) {
 					String[] centerElements = c.getString(valueIndex).split(",");
 					if (centerElements.length == 3) {
 						mapCenter = new GeoPoint(Double.parseDouble(centerElements[0]), Double.parseDouble(centerElements[1]), 0);
 					}
-				} else if (name.equals(METADATA_BOUNDS)) {
+				} else if (key.equals(METADATA_BOUNDS)) {
 					String[] boundElements = c.getString(valueIndex).split(",");
 					if (boundElements.length == 4) {
 						mapBounds = new GeoPoint[2];
 						mapBounds[0] = new GeoPoint(Double.parseDouble(boundElements[0]), Double.parseDouble(boundElements[1]), 0);
 						mapBounds[1] = new GeoPoint(Double.parseDouble(boundElements[2]), Double.parseDouble(boundElements[3]), 0);
 					}
+				} else if (key.equals(METADATA_NAME)) {
+					name = c.getString(valueIndex);
+				} else if (key.equals(METADATA_DESCRIPTION)) {
+					description = c.getString(valueIndex);
+				} else if (key.equals(METADATA_VERSION)) {
+					version = c.getString(valueIndex);
+				} else if (key.equals(METADATA_ATTRIBUTION)) {
+					attibution = c.getString(valueIndex);
+				} else if (key.equals(METADATA_TEMPLATE)) {
+					template = c.getString(valueIndex);
 				}
 			} while (c.moveToNext());
 		}
 		c.close();
 
-		return new TileSourceMetadata(mapBounds, mapCenter, minimumZoom, maximumZoom, 256);
+		return new MbTileSourceMetadata(mapBounds, mapCenter, minimumZoom, maximumZoom, 256,
+				name, description, version, attibution, template);
 	}
 
 
